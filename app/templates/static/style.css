@@ -1,0 +1,257 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #0b1020;
+    --panel: #121a2d;
+    --line: #26324a;
+    --text: #edf2ff;
+    --muted: #91a0bb;
+    --cyan: #70e1dc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(ellipse at 80% 0%, #1c2a46, transparent 38%), var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+}
+
+.shell {
+    max-width: 940px;
+    margin: auto;
+    padding: 34px 22px 50px;
+}
+
+.topbar, .section-head, .task, .task-actions, .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar {
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--line);
+}
+
+h1, h2, h3, h4, p {
+    margin-top: 0;
+}
+
+h1 {
+    font: 700 22px 'Space Grotesk';
+}
+
+h1 span, .intro h2 span {
+    color: var(--cyan);
+}
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.api-link {
+    color: var(--cyan);
+    text-decoration: none;
+    border: 1px solid #34505e;
+    padding: 9px 13px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 5px 32px;
+}
+
+.intro h2 {
+    font: 600 clamp(38px, 7vw, 62px)/1.02 'Space Grotesk';
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.orb {
+    width: 104px;
+    height: 104px;
+    border: 1px solid #426b78;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--cyan);
+    font: 700 42px 'Space Grotesk';
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-bottom: 18px;
+}
+
+.stats article, .panel, .task-list {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 19px;
+}
+
+.stats span {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.stats strong {
+    display: block;
+    font: 600 29px 'Space Grotesk';
+    margin-top: 8px;
+}
+
+.panel {
+    margin-bottom: 24px;
+}
+
+.section-head h3 {
+    font: 600 20px 'Space Grotesk';
+}
+
+.task-form input, .task-form select, .task-actions select {
+    width: 100%;
+    background: #0c1425;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 12px;
+    color: var(--text);
+    font: 13px 'DM Sans';
+    margin-bottom: 10px;
+}
+
+.form-row {
+    gap: 10px;
+}
+
+.form-row select {
+    width: 42%;
+    margin: 0;
+}
+
+.form-row button {
+    background: linear-gradient(110deg, #70e1dc, #70a9ed);
+    border: 0;
+    border-radius: 9px;
+    padding: 12px 22px;
+    color: #081321;
+    font-weight: 700;
+}
+
+.task-list {
+    padding-bottom: 7px;
+}
+
+.task {
+    padding: 15px 0;
+    border-top: 1px solid var(--line);
+    gap: 12px;
+}
+
+.task h4 {
+    font-size: 14px;
+    margin: 8px 0 4px;
+}
+
+.task p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.priority {
+    font-size: 9px;
+    text-transform: uppercase;
+    padding: 4px 7px;
+    border-radius: 5px;
+    background: #26324a;
+}
+
+.priority.high {
+    background: #54263b;
+    color: #ff9db8;
+}
+
+.priority.low {
+    background: #1c403e;
+    color: #8de5d5;
+}
+
+.task-actions {
+    gap: 8px;
+}
+
+.task-actions form {
+    margin: 0;
+}
+
+.task-actions select {
+    width: auto;
+    margin: 0;
+    padding: 8px;
+    font-size: 11px;
+}
+
+.delete {
+    background: transparent;
+    border: 1px solid #63354a;
+    color: #ff91ad;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+}
+
+.empty {
+    text-align: center;
+    padding: 36px 10px;
+    color: var(--muted);
+}
+
+.empty h4 {
+    color: var(--text);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    color: #64738e;
+    font-size: 11px;
+    padding: 25px 4px;
+}
+
+@media (max-width: 560px) {
+    .shell {
+        padding: 22px 14px;
+    }
+
+    .stats {
+        gap: 7px;
+    }
+
+    .stats article {
+        padding: 13px;
+    }
+
+    .stats strong {
+        font-size: 23px;
+    }
+}
