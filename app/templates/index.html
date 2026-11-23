@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS-PRO | Task Manager</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<main class="shell">
+
+    <header class="topbar">
+        <div>
+            <div class="eyebrow">PERSONAL WORKSPACE</div>
+            <h1>NEXUS<span>-PRO</span></h1>
+        </div>
+        <a class="api-link" href="/docs">API Docs ↗</a>
+    </header>
+
+    <section class="intro">
+        <div>
+            <p class="eyebrow">PLAN · TRACK · COMPLETE</p>
+            <h2>Make progress<br><span>visible.</span></h2>
+            <p class="muted">Organize your work and keep momentum.</p>
+        </div>
+        <div class="orb">N</div>
+    </section>
+
+    <section class="stats">
+        <article>
+            <span>ALL TASKS</span>
+            <strong>{{ total }}</strong>
+        </article>
+        <article>
+            <span>PENDING</span>
+            <strong>{{ pending }}</strong>
+        </article>
+        <article>
+            <span>COMPLETED</span>
+            <strong>{{ completed }}</strong>
+        </article>
+    </section>
+
+    <section class="panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">YOUR WORK</p>
+                <h3>Add a task</h3>
+            </div>
+        </div>
+
+        <form class="task-form" action="/tasks" method="post">
+            <input name="title"
+                   maxlength="120"
+                   placeholder="What needs to get done?"
+                   required>
+
+            <input name="description"
+                   placeholder="Description (optional)">
+
+            <div class="form-row">
+                <select name="priority">
+                    <option value="low">Low priority</option>
+                    <option value="medium" selected>Medium priority</option>
+                    <option value="high">High priority</option>
+                </select>
+
+                <button type="submit">+ Add task</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="task-list">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">YOUR PIPELINE</p>
+                <h3>Tasks</h3>
+            </div>
+            <span class="muted">{{ total }} total</span>
+        </div>
+
+        {% if tasks %}
+            {% for task in tasks %}
+
+            <article class="task">
+                <div class="task-main">
+                    <span class="priority {{ task.priority }}">
+                        {{ task.priority }}
+                    </span>
+
+                    <h4>{{ task.title }}</h4>
+
+                    {% if task.description %}
+                        <p>{{ task.description }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="task-actions">
+                    <form action="/tasks/{{ task.id }}/status"
+                          method="post">
+
+                        <select name="status"
+                                onchange="this.form.submit()">
+
+                            <option value="pending"
+                                {% if task.status == 'pending' %}selected{% endif %}>
+                                Pending
+                            </option>
+
+                            <option value="in_progress"
+                                {% if task.status == 'in_progress' %}selected{% endif %}>
+                                In progress
+                            </option>
+
+                            <option value="completed"
+                                {% if task.status == 'completed' %}selected{% endif %}>
+                                Completed
+                            </option>
+                        </select>
+                    </form>
+
+                    <form action="/tasks/{{ task.id }}/delete"
+                          method="post"
+                          onsubmit="return confirm('Delete this task?')">
+
+                        <button class="delete" type="submit">×</button>
+                    </form>
+                </div>
+            </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                <div>✦</div>
+                <h4>No tasks yet</h4>
+                <p>Add your first task above to get started.</p>
+            </div>
+
+        {% endif %}
+    </section>
+
+    <footer>
+        Built with Python · FastAPI · SQLite
+        <span>v1.0.0</span>
+    </footer>
+
+</main>
+
+</body>
+</html>
